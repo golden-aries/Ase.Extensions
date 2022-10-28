@@ -50,9 +50,9 @@ public class HttpMessageHandlerBuilderFilter : IHttpMessageHandlerBuilderFilter
             // Run other configuration first, we want to decorate.
             next(builder);
 
-            string loggerName = !string.IsNullOrEmpty(builder.Name) ? builder.Name : "Default";
-
-            ILogger logger = _loggerFactory.CreateLogger($"System.Net.Http.HttpClient.{builder.Name}.{typeof(LoggingHttpMessageHandler).FullName}");
+            string clientName = !string.IsNullOrEmpty(builder.Name) ? builder.Name : "Default";
+            var loggerName = $"System.Net.Http.HttpClient.{clientName}.{typeof(LoggingHttpMessageHandler).FullName}";
+            ILogger logger = _loggerFactory.CreateLogger(loggerName);
             builder.AdditionalHandlers.Add(new LoggingHttpMessageHandler(logger, options?.Get(builder.Name), jsonFormatter));
         };
     }

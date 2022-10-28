@@ -36,6 +36,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     });
                     services.AddOptions<HttpClientFactoryOptions>();
                     services.AddSingleton<IJsonFormatter, JsonFormatter>();
+
+                    // this replaces Microsoft provided IHttpMessageHandlerBuilderFilter implementaion
                     services.Replace(
                         ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, HttpMessageHandlerBuilderFilter>());
                     services.AddTransient<DemoApp>();
