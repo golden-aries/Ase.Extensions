@@ -4,6 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+	  <Authors>GoldenAries</Authors>
+	  <Company>GoldenAries.Club</Company>
+	  <Description>Additon to LoggingHttpMessageHandler capable of formatting json content</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageProjectUrl>goldenaries.club</PackageProjectUrl>
+	  <PackageTags>dotnet HttpClient DelegatingHandler</PackageTags>
+	  <NeutralLanguage />
+	  <PackageReleaseNotes>Inital Release</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
