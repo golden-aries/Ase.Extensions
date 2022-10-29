@@ -1,8 +1,10 @@
 // Sourced from a file licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Ase.Extensions.Http.Utils;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Net.Mime;
 
 namespace Ase.Extensions.Http
@@ -71,12 +73,18 @@ namespace Ase.Extensions.Http
 
         private static bool ShouldLogRequestBody(HttpRequestMessage request, ILogger logger)
         {
-            return logger.IsEnabled(LogLevel.Trace) && (request.Content?.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json);
+            return logger.IsEnabled(LogLevel.Trace)
+                &&
+                request.Content?.Headers.ContentType?.MediaType is not null
+                && RequestUtils.JsonContentTypes.Contains(request.Content.Headers.ContentType.MediaType);
         }
 
         private static bool ShouldLogResponseBody(HttpResponseMessage response, ILogger logger)
         {
-            return logger.IsEnabled(LogLevel.Trace) && (response.Content.Headers.ContentType?.MediaType == MediaTypeNames.Application.Json);
+            return logger.IsEnabled(LogLevel.Trace)
+                &&
+                response.Content?.Headers.ContentType?.MediaType is not null
+                && RequestUtils.JsonContentTypes.Contains(response.Content.Headers.ContentType.MediaType);
         }
 
         // Used in tests.
